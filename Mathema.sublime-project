@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace"
+			],
+			"name": "html",
+			"path": "www"
+		},
+		{
+			"name": "native",
+			"path": "Mathema"
+		}
+	]
+}
