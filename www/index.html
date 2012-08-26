@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+  
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+	<meta charset="utf-8">
+
+
+	<!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+	-->
+	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+	<script src="cordova-1.7.0.js"></script>
+	<script src="s/mootools/mootools-core-1.4.5-full-nocompat-yc.js"></script>
+	<script src="s/mootools/powertools-1.2.0.js"></script>
+	<script src="s/mootools/Array.Math.js"></script>
+	<script src="s/mootools/NumberUtils.js"></script>
+	<script src="s/mootools/ClassMethods.js"></script>
+	<script src="s/mootools/ElementUtils.js"></script>
+	<script src="s/Parser.js"></script>
+	<script src="s/Board.js"></script>
+	<script src="s/EquationBoard.js"></script>
+	<script src="s/TargetBoard.js"></script>
+	<script src="s/Piece.js"></script>
+	<script src="s/ComboBar.js"></script>
+	<script src="s/View.js"></script>
+	<script src="s/ViewController.js"></script>
+	<script src="s/EquationView.js"></script>
+	<script src="s/TargetView.js"></script>
+	<script src="s/MenuView.js"></script>
+	<link rel="stylesheet" type="text/css" href="c/reset.css">
+	<link rel="stylesheet" type="text/css" href="c/main.css">
+	<link rel="stylesheet" type="text/css" href="c/mathema.css">
+	<link rel="stylesheet" type="text/css" href="c/equation.css">
+	<link rel="stylesheet" type="text/css" href="c/target.css">
+	<script type="text/javascript">
+
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	/*
+	function handleOpenURL(url)
+	{
+		// TODO: do something with the url passed in.
+	}
+	*/
+	
+	function onBodyLoad()
+	{		
+		if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+			$(document.body).addClass('device');
+			document.addEventListener("deviceready", onDeviceReady, false);
+		} else {
+			$(document.body).addClass('browser');
+			onDeviceReady(); //this is the browser
+		}
+	}
+	
+	/* When this function is called, Cordova has been initialized and is ready to roll */
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	function onDeviceReady()
+	{
+		// do your thing!
+		// navigator.notification.alert("Cordova is working")
+		// Lggr.init();
+		// Lggr.floatLog();
+
+		if($(document.body).hasClass('device'))
+		{
+			/* GOOGLE ANALYTICS */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-32522055-1'],
+				['_trackPageview'],
+				['_setDevice', device.uuid]
+				);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+			/* END GA */
+		}
+
+		var body = $(document.body);
+		var bodySize = body.getSize();
+		var viewSize = {};
+		if (navigator.userAgent.match(/(iPhone|iPod)/) || true) {
+			body.setStyle('width', '320px');
+			body.setStyle('height', '480px');
+			viewSize.x = 320;
+			viewSize.y = 480;
+		} else if(navigator.userAgent.match(/(iPad)/)){
+			body.setStyle('width', '768px');
+			body.setStyle('height', '1024px');
+			viewSize.x = 768;
+			viewSize.y = 1024;
+		} else
+		{
+			body.setStyle('width', bodySize.x);
+			body.setStyle('height', bodySize.y);
+			viewSize.x = bodySize.x;
+			viewSize.y = bodySize.y;
+		}
+
+		// log('viewSize.width', viewSize.x);
+		// log('viewSize.height', viewSize.y);
+
+		var viewController = new ViewController(viewSize);
+		body.adopt(viewController.options.viewContainer);
+	}
+	</script>
+	</head>
+	<body onload="onBodyLoad()">
+	</body>
+</html>

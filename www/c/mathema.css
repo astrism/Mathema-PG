@@ -1,0 +1,191 @@
+@font-face {
+  font-family: "Metal Lord";  src: url("../f/metallord.otf");
+}
+
+* {
+	font-family:"Metal Lord", sans-serif;
+	color: #FFFFFF;
+}
+
+body {
+	font-size: 1em;
+	background-color: #222;
+}
+
+#viewContainer {
+	background-color: #222;
+}
+
+/*MAIN MENU*/
+#title {
+	margin: 0;
+	text-align: center;
+	position: relative;
+	top: 15px;
+	font-size: 4em;
+}
+
+.start {
+	text-align: center;
+	font-size: 2em;
+	padding: 15px;
+	background: white;
+	position: relative;
+	top: 105px;
+	color: #222;
+	margin: 0 1em 0.5em 1em;
+	border-radius: 2px;
+}
+
+/*GAME BOARD*/
+
+#feedback {
+	width: 100%;
+	height: 5%;
+}
+
+#feedback p {
+	margin: 0;
+	text-align: center;
+	-webkit-animation: fadeOut 2.0s ease 2.0s 1 forwards, bounceIn 5.0s ease 0.0s 1 forwards;
+	-webkit-animation-fill-mode: forwards;
+}
+
+#feedback p {
+	font-size: 1.4em;
+}
+
+#score {
+	width: 100%;
+	height: 14%;
+	font-size: 3.5em;
+	text-align: center;
+	overflow: hidden;
+	margin-top: 20px;
+}
+
+#end {
+	width: 3em;
+	height: 3em;
+	text-align: center;
+	line-height: 3em;
+	position: absolute;
+	left: 0.1em;
+	bottom: 0.2em;
+	border-radius: 50%;
+	background-color: #222;
+}
+
+.piece {
+	background-color: #FFFFFF;
+	margin: 0;
+	color: #222;
+	text-align: center;
+	-webkit-transition:all 0.5s ease;
+	border-radius: 50%;
+}
+
+.piece.highlighted {
+	-webkit-animation-name:highlight;
+	-webkit-animation-duration: 0.5s;
+	background-color: #FF0000;
+	color: #FFFFFF;
+}
+
+.line {
+	-webkit-transform-origin: 0 100%;
+	height: 3px; /* Line width of 3 */
+	background: #FF0000;
+	margin: 0;
+	position: absolute;
+}
+
+/*ANIMATIONS*/
+
+@-webkit-keyframes highlight {
+	0% {
+		color: #222;
+		background-color: #FFFFFF;
+	}
+	25% {
+		color: #FF0000;
+		background-color: #FFFFFF;
+	}
+	100% {
+		color: #FFFFFF;
+	}
+}
+
+/* Animate.css - http://daneden.me/animate */
+@-webkit-keyframes shake {
+	0%, 100% {-webkit-transform: translateX(0);}
+	10% {-webkit-transform: translateX(-15%);}
+	20% {-webkit-transform: translateX(15%);}
+	30% {-webkit-transform: translateX(-10%);}
+	50% {-webkit-transform: translateX(10%);}
+	70% {-webkit-transform: translateX(-5%);}
+	90% {-webkit-transform: translateX(5%);}
+}
+.shake {
+	-webkit-animation-name: shake;
+	-webkit-animation-duration: 0.5s;
+}
+
+@-webkit-keyframes pieceRotate {
+	0% {
+		-webkit-transform-origin: center center;
+		-webkit-transform: rotate(-200deg);
+		opacity: 0;
+	}
+
+	100% {
+		-webkit-transform-origin: center center;
+		-webkit-transform: rotate(0);
+		background-color: #FFFFFF;
+		color: #222;
+		opacity: 1;
+	}
+}
+.pieceRotate {
+	-webkit-animation-name: pieceRotate;
+	-webkit-animation-duration: 0.5s;
+}
+
+.bounceIn {
+	-webkit-animation-name: bounceIn;
+	-webkit-animation-duration: 0.5s;
+}
+
+@-webkit-keyframes bounceIn {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(.3);
+	}
+
+	5% {
+		opacity: 1;
+		-webkit-transform: scale(1.05);
+	}
+
+	10% {
+		-webkit-transform: scale(.9);
+	}
+
+	15% {
+		-webkit-transform: scale(1);
+	}
+	100% {
+		-webkit-transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.fadeOut {
+	-webkit-animation-name: fadeOut;
+	animation-name: fadeOut;
+}
+
+@-webkit-keyframes fadeOut {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}

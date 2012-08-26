@@ -1,0 +1,36 @@
+* {
+	-webkit-user-select:none;
+	user-select:none;
+	outline:none;
+	-webkit-backface-visibility:hidden; 
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeSpeed;
+	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+} 
+
+body {
+	overflow: hidden;
+}
+
+#viewContainer {
+	width: 100%;
+	height: 100%;
+}
+
+
+/*GAME BOARD*/
+
+#board {
+	width: 100%;
+	height: 60%;
+	overflow: hidden;
+	position: relative;
+}
+
+.piece {
+	text-decoration: none;
+	-webkit-user-select:none;
+	user-select:none;
+	position: absolute;
+}

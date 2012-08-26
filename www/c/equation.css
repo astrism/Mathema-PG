@@ -1,0 +1,15 @@
+#equation p {
+	font-size: 2.3em;
+}
+
+#equation {
+	width: 100%;
+	height: 10%;
+}
+
+#equation p {
+	margin: 0;
+	text-align: center;
+	-webkit-animation: fadeOut 2.0s ease 2.0s 1 forwards, bounceIn 5.0s ease 0.0s 1 forwards;
+	-webkit-animation-fill-mode: forwards;
+}

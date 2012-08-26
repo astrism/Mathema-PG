@@ -1,0 +1,140 @@
+/* @override 
+	http://fiddy.dev/FTCE/log/log.css
+	http://hg.dev/l/log.css
+	http://fiddy.dev/log/log.css
+*/
+
+#lggr {
+	z-index:10000;
+	padding-bottom: 0;
+}
+
+#lggr * {
+	font-family: monospace;
+	text-shadow: none;
+	color: #000;
+}
+
+#lggrScroll {
+	border-top: 1px solid #444444;
+	position:fixed;
+	overflow: scroll;
+	list-style-position: inside;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	-webkit-transition:all .5s ease;
+	width: 100%;
+	background-color: #444444;
+}
+
+#lggr a {
+	text-decoration:none;
+}
+
+#lggrTitle, #lggrTitle * {
+	font: 12px/25px Arial;
+	z-index: 1;
+}
+
+#lggrOpen {
+	color: #FFFFFF;
+	width: 100%;
+	position: absolute;
+	cursor: pointer;
+	text-align: center;
+	height: 20px;
+}
+#lggrTitle {
+	background-color: #222222;
+	position: fixed;
+	color: #fffeff;
+	width: 100%;
+	bottom: 0;
+}
+
+#lggr .lggrTouch {
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	user-select: text;
+}
+
+#lggr .lggrNoTouch {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+#lggrRight {
+	position: absolute;
+	right: 0;
+}
+
+#lggrLeft {
+	position: absolute;
+	left: 0;
+}
+
+#lggrLeft > span {
+	float: left;
+}
+
+#lggrRight > span {
+	float: right;
+}
+
+#lggrLeft span, #lggrRight span {
+	margin-left: 1px;
+	background-color: #363636;
+	color: #ffffff;
+	height: 22px;
+	padding: 0 20px;
+}
+
+#lggrRunInput, #lggrFilterInput {
+	padding: 3px 0 0 0;
+	border: none;
+	margin: 1px 3px 0;
+	height: 20px;
+	width: 147px;
+}
+
+#lggrFormClick {
+	width: 150px;
+	height: 22px;
+	position: absolute;
+	top: 0;
+}
+
+#lggrFormClick.error {
+	background: rgba(255,0,0,0.1);
+}
+
+.lggrLog {
+	background-color: #515151;
+	border-bottom: 1px solid #323232;
+	position: relative;
+	margin: 0;
+}
+
+.lggrLog span {
+	min-width: 39px;
+	text-align: right;
+	padding: 5px;
+	font: 10px;
+	color: #fffeff;
+	background-color: #858585;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.lggrLogs {
+	background-color: #DDDDDD;
+	padding-bottom: 5px;
+	padding-left: 55px;
+	list-style-position: inside;
+	list-style-type: none;
+	padding-top: 5px;
+	margin: 0;
+}

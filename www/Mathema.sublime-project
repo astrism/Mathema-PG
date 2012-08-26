@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/ampersand/Git/MathemaiOS/www",
+            "name": "html",
+            "file_exclude_patterns": ["*.sublime-workspace"]
+		},
+		{
+			"path": "/Users/ampersand/Git/MathemaiOS/Mathema/",
+            "name": "native"
+		}
+	]
+}

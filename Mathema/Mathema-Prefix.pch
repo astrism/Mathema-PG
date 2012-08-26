@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Mathema' target in the 'Mathema' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+#endif
