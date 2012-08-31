@@ -77,7 +77,7 @@ var Board = new Class({
 			
 		if(target !== undefined)
 		{
-			if(target.options.type == PIECE_TYPE_NUMBER)
+			if(target.options.type === PIECE_TYPE_NUMBER)
 			{
 				target.options.rep.addClass('highlighted');
 				this.options.chain.push(target);
@@ -103,10 +103,10 @@ var Board = new Class({
 		// log('target === null:' + (target === null));
 		// log('target === undefined:' + (target === undefined));
 		// log('target === lastPiece:' + (target == lastPiece));
-		if(target === null || target === undefined || target == lastPiece)
+		if(target === null || target === undefined || target === lastPiece)
 			return;
 
-		if(target == this.options.currentTarget)
+		if(target === this.options.currentTarget)
 		{
 			return; //same as the last target checked
 		} else {
@@ -123,13 +123,13 @@ var Board = new Class({
 
 			// log("distance:" + distance);
 			// log("maxDistance:" + this.options.maxDistance);
-			if(index == -1)
+			if(index === -1)
 			{
 				target.options.rep.addClass('highlighted');
 				chain.push(target);
 				this.options.lastPiece = target;
 				target.options.rep.store('line', this.createLine(lastPiece.options.rep, target.options.rep));
-			} else if(chain.length > 1 && index == chain.length - 2) {
+			} else if(chain.length > 1 && index === chain.length - 2) {
 				var oldPiece = chain.pop();
 				oldPiece.options.rep.removeClass('highlighted');
 				oldPiece.options.rep.retrieve('line').dispose();
@@ -145,7 +145,7 @@ var Board = new Class({
 		var lastLoc = lastPiece.options.rep.getPosition();
 		lastLoc = [lastLoc.x, lastLoc.y];
 		var distance = targetLoc.distance(lastLoc).toInt();
-		if(distance > this.options.maxDistance || (piece.options.type != PIECE_TYPE_NUMBER && lastPiece.options.type != PIECE_TYPE_NUMBER))
+		if(distance > this.options.maxDistance || (piece.options.type !== PIECE_TYPE_NUMBER && lastPiece.options.type !== PIECE_TYPE_NUMBER))
 		{
 			// log('not the right type');
 			return false;

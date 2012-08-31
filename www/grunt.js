@@ -12,7 +12,7 @@ module.exports = function(grunt)
 		},
 		lint: {
 			files: [
-				's/**/*.js'
+				's/*.js'
 			]
 			// afterconcat: ['js/*.js', 'mod/**/*.js']
 		},

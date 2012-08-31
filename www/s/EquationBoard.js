@@ -18,7 +18,7 @@ var EquationBoard = new Class({
 			minNum = PIECE_TYPE_OPERATOR;
 		var rand = Number.random(minNum, maxNum);
 		piece.setValue(rand);
-		if(rand == PIECE_TYPE_EQUAL)
+		if(rand === PIECE_TYPE_EQUAL)
 			this.options.currentEqual++;
 	},
 	validateChain: function(chain, scoreChain) {
@@ -50,7 +50,7 @@ var EquationBoard = new Class({
 						mainValue = Parser.evaluate(currentValue);
 					else {
 						nextValue = Parser.evaluate(currentValue);
-						if(mainValue != nextValue)
+						if(mainValue !== nextValue)
 						{
 							$$('.highlighted').addCssAnimation('shake');
 							return false; // end loop if found a mismatch
@@ -66,12 +66,12 @@ var EquationBoard = new Class({
 		if(hasEqual && hasRight)
 		{
 			equation += "=" + currentValue;
-			if(PIECE_OPERATOR_STRINGS.indexOf(currentValue[currentValue.length - 1]) == -1)
+			if(PIECE_OPERATOR_STRINGS.indexOf(currentValue[currentValue.length - 1]) === -1)
 				nextValue = Parser.evaluate(currentValue);
 			else //last char is a symbol
 				nextValue = false;
 			
-			if(mainValue == nextValue)
+			if(mainValue === nextValue)
 			{
 				if(scoreChain === true)
 				{
