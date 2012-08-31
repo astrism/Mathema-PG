@@ -1,2 +1,5 @@
 language: node_js
-script: "build.sh"
+node_js: 0.8
+script: "bash -ex build.sh"
+notifications:
+  irc: "irc.freenode.org#mathema"
