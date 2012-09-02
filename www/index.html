@@ -14,17 +14,17 @@
 	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
 	<script src="cordova-1.7.0.js"></script>
 	<script src="s/mootools/mootools-core-1.4.5-full-nocompat-yc.js"></script>
-	<script src="s/mootools/powertools-1.2.0.js"></script>
 	<script src="s/mootools/Array.Math.js"></script>
 	<script src="s/mootools/NumberUtils.js"></script>
 	<script src="s/mootools/ClassMethods.js"></script>
 	<script src="s/mootools/ElementUtils.js"></script>
-	<script src="s/Parser.js"></script>
+	<script src="s/mootools/powertools-1.2.0.js"></script>
+	<script src="s/libs/Parser.js"></script>
+	<script src="s/libs/fastclick.js"></script>
 	<script src="s/Board.js"></script>
 	<script src="s/EquationBoard.js"></script>
 	<script src="s/TargetBoard.js"></script>
 	<script src="s/Piece.js"></script>
-	<script src="s/ComboBar.js"></script>
 	<script src="s/View.js"></script>
 	<script src="s/ViewController.js"></script>
 	<script src="s/EquationView.js"></script>
@@ -52,6 +52,7 @@
 		if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
 			$(document.body).addClass('device');
 			document.addEventListener("deviceready", onDeviceReady, false);
+			new FastClick(document.body); //to remove click delay
 		} else {
 			$(document.body).addClass('browser');
 			onDeviceReady(); //this is the browser
@@ -89,7 +90,7 @@
 		var body = $(document.body);
 		var bodySize = body.getSize();
 		var viewSize = {};
-		if (navigator.userAgent.match(/(iPhone|iPod)/) || true) {
+		if (navigator.userAgent.match(/(iPhone|iPod)/)) {
 			body.setStyle('width', '320px');
 			body.setStyle('height', '480px');
 			viewSize.x = 320;

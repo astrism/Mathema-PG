@@ -45,18 +45,10 @@ var TargetBoard = new Class(
 			}
 		});
 
-		var equationValue;
-		try
-		{
-			equationValue = Parser.evaluate(equation);
-		}
-		catch (e)
-		{
-			if (scoreChain) console.log('equation fail');
-		}
+		var equationValue = this.evalOOO(equation);
 
 		// log("equationValue:", equationValue);
-		if (!scoreChain && equationValue !== undefined)
+		if (!scoreChain && equationValue !== null)
 		{
 			return {
 				'value': equationValue,

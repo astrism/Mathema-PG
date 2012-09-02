@@ -87,7 +87,7 @@ body {
 
 .piece.highlighted {
 	-webkit-animation-name:highlight;
-	-webkit-animation-duration: 0.5s;
+	-webkit-animation-duration: 0.2s;
 	background-color: #FF0000;
 	color: #FFFFFF;
 }

@@ -11,10 +11,6 @@ var TargetView = new Class({
 
 		this.options.boardSize = windowSize;
 
-		//ComboBar
-		comboBar = new ComboBar();
-		rep.adopt(comboBar.options.rep);
-
 		//target
 		var target = new Element('div#target');
 		rep.adopt(target);
@@ -53,9 +49,8 @@ var TargetView = new Class({
 	onScore: function(args)
 	{
 		console.log('onScore');
-		comboBar.comboUp(); //update combo
 
-		this.options.points += args.points * comboBar.options.multiplier;
+		this.options.points += args.points;
 		$('score').set('html', this.options.points + " P0ints");
 
 		// var feedbackContainer = $('feedback');

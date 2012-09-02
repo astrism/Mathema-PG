@@ -20,7 +20,8 @@ var Board = new Class({
 		boundTouchMove: {},
 		points: 0,
 		piecesByRep: {}, //lookup for pieces by rec
-		pieceCount: 0
+		pieceCount: 0,
+		lastMoveCheck: 0
 	},
 	initialize: function($width, $cols, $rows, $spacing){
 		this.options.width = $width;
@@ -93,17 +94,21 @@ var Board = new Class({
 		}
 	},
 	onTouchMove: function(event) {
+		var time = new Date();
+		if(time - 50 > this.options.lastMoveCheck)
+			this.options.lastMoveCheck = time;
+		else
+			return;//dont check more that every 250ms
 		console.log('onTouchMove');
+
 		// var target = this.options.pieces[event.target.id]; //only works in browser
 		var target = this.getPieceByPos(event.client, this.options.rep.getPosition()); // works on native
-		// event.target.addClass('target');
-		var lastPiece = this.options.lastPiece;
 		// log('target.id:' + target.options.id);
 		// log('lastPiece.id:' + lastPiece.options.id);
 		// log('target === null:' + (target === null));
 		// log('target === undefined:' + (target === undefined));
 		// log('target === lastPiece:' + (target == lastPiece));
-		if(target === null || target === undefined || target === lastPiece)
+		if(target === null || target === undefined || target === this.options.lastPiece)
 			return;
 
 		if(target === this.options.currentTarget)
@@ -113,7 +118,7 @@ var Board = new Class({
 			this.options.currentTarget = target;
 		}
 
-		if(this.validatePiece(target, lastPiece)) // check if its a valid move
+		if(this.validatePiece(target, this.options.lastPiece)) // check if its a valid move
 		{
 			// log('target:' + target);
 			// log('target.id:' + target.options.id);
@@ -127,8 +132,8 @@ var Board = new Class({
 			{
 				target.options.rep.addClass('highlighted');
 				chain.push(target);
+				target.options.rep.store('line', this.createLine(this.options.lastPiece.options.rep, target.options.rep));
 				this.options.lastPiece = target;
-				target.options.rep.store('line', this.createLine(lastPiece.options.rep, target.options.rep));
 			} else if(chain.length > 1 && index === chain.length - 2) {
 				var oldPiece = chain.pop();
 				oldPiece.options.rep.removeClass('highlighted');
@@ -278,5 +283,27 @@ var Board = new Class({
 			// console.log('startingPos:', startingPos);
 			return startingPos;
 		}
+	},
+	evalOOO: function(equation) {
+		//evaluate with standard order of operations
+		try{
+			return Parser.evaluate(equation);
+		} catch(e){
+			return null;
+		}
+	},
+	evalProgressive: function(equation) {
+		//evaluate progressively, ignoring the order of operations
+		console.log('evalProgressive');
+		var currentValue = 0;
+		var numbers = equation.split('d*');
+		var operators = equation.split('[-+*/=]*');
+		console.log(numbers);
+		console.log(operators);
+		// try{
+		//	return Parser.evaluate(equation);
+		// } catch(e){
+		//	return null;
+		// }
 	}
 });
