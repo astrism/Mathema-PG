@@ -284,7 +284,7 @@ var Board = new Class({
 			return startingPos;
 		}
 	},
-	evalOOO: function(equation) {
+	evalPrecedence: function(equation) {
 		//evaluate with standard order of operations
 		try{
 			return Parser.evaluate(equation);
@@ -294,12 +294,21 @@ var Board = new Class({
 	},
 	evalProgressive: function(equation) {
 		//evaluate progressively, ignoring the order of operations
-		console.log('evalProgressive');
 		var currentValue = 0;
-		var numbers = equation.split('d*');
-		var operators = equation.split('[-+*/=]*');
-		console.log(numbers);
-		console.log(operators);
+		var numbers = equation.match(/\d+/g);
+		var operators = equation.match(/[-+*\/=]/g);
+		if(numbers && operators)
+		{
+			console.log('evalProgressive:' + equation + "!");
+			console.log(numbers);
+			console.log(numbers.length);
+			console.log(operators);
+		}
+
+		// if(operators === null)
+		// {
+		// 	return num
+		// }
 		// try{
 		//	return Parser.evaluate(equation);
 		// } catch(e){

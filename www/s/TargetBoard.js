@@ -45,7 +45,7 @@ var TargetBoard = new Class(
 			}
 		});
 
-		var equationValue = this.evalOOO(equation);
+		var equationValue = this.evalProgressive(equation);
 
 		// log("equationValue:", equationValue);
 		if (!scoreChain && equationValue !== null)
