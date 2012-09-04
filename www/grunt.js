@@ -10,6 +10,9 @@ module.exports = function(grunt)
 			'/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
 			'<%= grunt.template.today("yyyy-mm-dd") %> */'
 		},
+		qunit: {
+			files: 'Test.html'
+		},
 		lint: {
 			files: [
 				's/*.js'
@@ -47,7 +50,6 @@ module.exports = function(grunt)
 	});
 
 	// Default task.
-	grunt.registerTask('default', 'lint');
-	grunt.registerTask('mathema', 'lint');
+	grunt.registerTask('default', 'lint qunit');
 
 };

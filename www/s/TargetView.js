@@ -3,7 +3,8 @@ var TargetView = new Class({
 	Implements: [Options, Events],
 	options: {
 		points: 0,
-		comboBar: {}
+		comboBar: {},
+		board: {}
 	},
 	initialize: function(windowSize){
 		this.parent(windowSize);
@@ -16,7 +17,7 @@ var TargetView = new Class({
 		rep.adopt(target);
 
 		//game board
-		var board = new TargetBoard(this.options.boardSize.x, 5, 5, 0.05);
+		var board = this.options.board = new TargetBoard(this.options.boardSize.x, 5, 5, 0.05);
 		rep.adopt(board.options.rep);
 		board.addEvent(BOARD_SCORE, this.onScore);
 		board.addEvent(BOARD_TARGET, this.setTarget);

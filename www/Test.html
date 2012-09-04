@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen">
+		<script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+		<meta charset="utf-8"><!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />        
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />       
+	-->
+		<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+
+		<script src="s/libs/cordova-1.7.0.js" type="text/javascript"></script>
+		<script src="s/mootools/mootools-core-1.4.5-full-nocompat-yc.js" type="text/javascript"></script>
+		<script src="s/mootools/Array.Math.js" type="text/javascript"></script>
+		<script src="s/mootools/NumberUtils.js" type="text/javascript"></script>
+		<script src="s/mootools/ClassMethods.js" type="text/javascript"></script>
+		<script src="s/mootools/ElementUtils.js" type="text/javascript"></script>
+		<script src="s/mootools/powertools-1.2.0.js" type="text/javascript"></script>
+		<script src="s/libs/Parser.js" type="text/javascript"></script>
+		<script src="s/Board.js" type="text/javascript"></script>
+		<script src="s/EquationBoard.js" type="text/javascript"></script>
+		<script src="s/TargetBoard.js" type="text/javascript"></script>
+		<script src="s/Piece.js" type="text/javascript"></script>
+		<script src="s/View.js" type="text/javascript"></script>
+		<script src="s/ViewController.js" type="text/javascript"></script>
+		<script src="s/EquationView.js" type="text/javascript"></script>
+		<script src="s/TargetView.js" type="text/javascript"></script>
+		<script src="s/MenuView.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="c/reset.css">
+		<link rel="stylesheet" type="text/css" href="c/main.css">
+		<link rel="stylesheet" type="text/css" href="c/mathema.css">
+		<link rel="stylesheet" type="text/css" href="c/equation.css">
+		<link rel="stylesheet" type="text/css" href="c/target.css">
+		<style type="text/css">
+			* {
+				font-family: sans-serif;	
+			}	
+		</style>
+		<script type="text/javascript">
+
+		/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+		see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+		for more details -jm */
+		/*
+		function handleOpenURL(url)
+		{
+		// TODO: do something with the url passed in.
+		}
+		*/
+
+		function onBodyLoad()
+		{       
+		if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+			$(document.body).addClass('device');
+			document.addEventListener("deviceready", onDeviceReady, false);
+		} else {
+			$(document.body).addClass('browser');
+			onDeviceReady(); //this is the browser
+		}
+		}
+
+		/* When this function is called, Cordova has been initialized and is ready to roll */
+		/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+		see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+		for more details -jm */
+		function onDeviceReady()
+		{
+			var body = $(document.body);
+			var bodySize = body.getSize();
+			var viewSize = {};
+			
+			//iPhone
+			body.setStyle('width', '320px');
+			body.setStyle('height', '480px');
+			viewSize.x = 320;
+			viewSize.y = 480;
+
+			var viewController = new ViewController(viewSize);
+			body.adopt(viewController.options.viewContainer);
+
+			viewController.addView(TargetView);
+			var board = viewController.options.currentView.options.board;
+
+			module('Board Equation Evaluation');
+			test("Simple Equation", function(){
+				expect(2);
+				var boardValue;
+
+				boardValue = board.evalPrecedence('1+2*3');
+				equal(boardValue, 7, "evalPrecedence");
+
+				boardValue = board.evalProgressive('1+2*3');
+				equal(boardValue, 9, "evalProgressive");
+			});
+
+			test("Trailing Operator", function(){
+				expect(2);
+				var boardValue;
+
+				boardValue = board.evalPrecedence('1+2*');
+				equal(boardValue, 3, "evalPrecedence");
+
+				boardValue = board.evalProgressive('1+2*');
+				equal(boardValue, 3, "evalProgressive");
+			});
+			QUnit.start();
+		}
+		</script>
+	</head>
+	<body onload="onBodyLoad()">
+		<h1 id="qunit-header">
+			QUnit example
+		</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+		<div id="qunit-fixture">
+			test markup, will be hidden
+		</div>
+	</body>
+</html>
