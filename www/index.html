@@ -12,7 +12,7 @@
 	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
 	-->
 	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
-	<script src="cordova-1.7.0.js"></script>
+	<script src="s/libs/cordova-1.7.0.js"></script>
 	<script src="s/mootools/mootools-core-1.4.5-full-nocompat-yc.js"></script>
 	<script src="s/mootools/Array.Math.js"></script>
 	<script src="s/mootools/NumberUtils.js"></script>
@@ -51,7 +51,6 @@
 		if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
 			$(document.body).addClass('device');
 			document.addEventListener("deviceready", onDeviceReady, false);
-			new FastClick(document.body); //to remove click delay
 		} else {
 			$(document.body).addClass('browser');
 			onDeviceReady(); //this is the browser
@@ -115,6 +114,6 @@
 	}
 	</script>
 	</head>
-	<body onload="onBodyLoad()">
+			<body onload="onBodyLoad()">
 	</body>
 </html>
