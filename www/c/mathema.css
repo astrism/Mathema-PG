@@ -2,18 +2,14 @@
   font-family: "Metal Lord";  src: url("../f/metallord.otf");
 }
 
-* {
-	font-family:"Metal Lord", sans-serif;
-	color: #FFFFFF;
-}
-
-body {
+#viewContainer {
 	font-size: 1em;
 	background-color: #222;
 }
 
-#viewContainer {
-	background-color: #222;
+#viewContainer > * {
+	font-family:"Metal Lord", sans-serif;
+	color: #FFFFFF;
 }
 
 /*MAIN MENU*/
