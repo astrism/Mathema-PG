@@ -1,4 +1,4 @@
 cd www
 npm install grunt
-grunt mathema
+grunt
 exit $?
