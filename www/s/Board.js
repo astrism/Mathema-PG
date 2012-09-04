@@ -1,4 +1,5 @@
 var BOARD_SCORE = 'BOARD_SCORE';
+var BOARD_EQ_UPDATE = 'BOARD_EQ_UPDATE';
 
 var Board = new Class(
 {
@@ -86,9 +87,7 @@ var Board = new Class(
 		{
 			if (target.options.type === PIECE_TYPE_NUMBER)
 			{
-				target.options.rep.addClass('highlighted');
-				this.options.chain.push(target);
-				this.options.lastPiece = target;
+				this.selectPiece(target);
 
 				this.options.boundTouchEnd = this.onTouchEnd.bind(this);
 				this.options.rep.addEvent('touchend', this.options.boundTouchEnd);
@@ -138,10 +137,8 @@ var Board = new Class(
 			// log("maxDistance:" + this.options.maxDistance);
 			if (index === -1)
 			{
-				target.options.rep.addClass('highlighted');
-				chain.push(target);
 				target.options.rep.store('line', this.createLine(this.options.lastPiece.options.rep, target.options.rep));
-				this.options.lastPiece = target;
+				this.selectPiece(target);
 			}
 			else if (chain.length > 1 && index === chain.length - 2)
 			{
@@ -173,8 +170,10 @@ var Board = new Class(
 	},
 	selectPiece: function(piece)
 	{
-
-		},
+		piece.options.rep.addClass('highlighted');
+		this.options.chain.push(piece);
+		this.options.lastPiece = piece;
+	},
 	onTouchEnd: function(event)
 	{
 		// log('onTouchEnd');
