@@ -28,6 +28,7 @@
 		<script src="s/EquationView.js" type="text/javascript"></script>
 		<script src="s/TargetView.js" type="text/javascript"></script>
 		<script src="s/MenuView.js" type="text/javascript"></script>
+		<script src="s/EndGameView.js"></script>
 		<link rel="stylesheet" type="text/css" href="c/reset.css">
 		<link rel="stylesheet" type="text/css" href="c/main.css">
 		<link rel="stylesheet" type="text/css" href="c/mathema.css">
@@ -80,7 +81,7 @@
 			var viewController = new ViewController(viewSize);
 			body.adopt(viewController.options.viewContainer);
 
-			viewController.addView(TargetView);
+			viewController.onViewNav(TargetView);
 			var board = viewController.options.currentView.options.board;
 
 			module('Board Equation Evaluation');
@@ -95,6 +96,7 @@
 				equal(boardValue, 9, "evalProgressive");
 			});
 
+			module('Board Chain Validation');
 			test("Trailing Operator", function(){
 				expect(2);
 				var boardValue;
@@ -105,6 +107,48 @@
 				boardValue = board.evalProgressive('1+2*');
 				equal(boardValue, 3, "evalProgressive");
 			});
+
+			asyncTest("Wiggle", function(){
+				expect(100);
+				var repeat = 100;
+				var boardValue;
+				var startingIndex;
+				var startingPiece;
+				var answer;
+				viewController.options.currentView.options.rep.addEvent(BOARD_GAME_OVER, onGameOver);
+
+				// board
+				var interval = setInterval(function(e)
+				{
+					// get piece
+					startingIndex = Number.random(0, board.options.pieceCount - 1);
+					startingPiece = board.options.pieces["piece" + startingIndex];
+					if (startingPiece.options.type === PIECE_TYPE_NUMBER)
+					{
+						answer = board.wiggle(startingPiece);
+						if(answer !== null)
+						{
+							answer = board.validateChain(answer.solution, true);
+							if(answer !== null)
+							{
+								ok(true);
+								repeat--;
+								if(repeat == 0)
+								{
+									start();
+									console.log('clearInterval:',clearInterval);
+									clearInterval(interval);
+								}
+							}
+						}
+					}
+				}, 5 );
+
+				function onGameOver(e) {
+					start();//test completed board
+				}
+			});
+
 			QUnit.start();
 		}
 		</script>

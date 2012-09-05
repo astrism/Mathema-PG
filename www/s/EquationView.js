@@ -44,7 +44,7 @@ var EquationView = new Class({
 	},
 	onScore: function(args)
 	{
-		console.log('onScore');
+		// console.log('onScore');
 		$('score').set('html', args.points + " P0ints");
 
 		var feedbackContainer = $('feedback');

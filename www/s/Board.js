@@ -1,5 +1,6 @@
 var BOARD_SCORE = 'BOARD_SCORE';
 var BOARD_EQ_UPDATE = 'BOARD_EQ_UPDATE';
+var BOARD_GAME_OVER = 'BOARD_GAME_OVER';
 
 var Board = new Class(
 {
@@ -173,6 +174,7 @@ var Board = new Class(
 		piece.options.rep.addClass('highlighted');
 		this.options.chain.push(piece);
 		this.options.lastPiece = piece;
+		this.fireEvent(BOARD_EQ_UPDATE, this.options.chain);
 	},
 	onTouchEnd: function(event)
 	{

@@ -1,10 +1,10 @@
-var MenuView = new Class({
+var EndGameView = new Class({
 	Extends: View,
 	initialize: function(windowSize){
 		this.parent(windowSize);
 		var rep = this.options.rep;
 		var title = new Element('h1#title.bounceIn', {
-			html: 'Metal<br/>Máthēma'
+			html: 'Game<br/>Over'
 		});
 		rep.adopt(title);
 
@@ -17,7 +17,7 @@ var MenuView = new Class({
 		// rep.adopt(equationButton);
 
 		var targetButton = new Element('div.start.bounceIn', {
-			text: 'Play',
+			text: 'Play Again',
 			events: {
 				touch: this.onPlayTarget.bind(this)
 			}

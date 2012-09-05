@@ -6,7 +6,8 @@ var TargetBoard = new Class(
 	options: {
 		targetNumber: 0,
 		difficulty: 1,
-		progress: 0
+		progress: 0,
+		numbers: []
 	},
 	setupBoard: function()
 	{
@@ -30,29 +31,22 @@ var TargetBoard = new Class(
 		var board = this;
 		var piece;
 		var equation = "";
-		var operatorCount = 0;
 		Array.each(chain, function(piece, i)
 		{
-			switch (piece.options.type)
-			{
-			case PIECE_TYPE_OPERATOR:
-				operatorCount++;
-				equation += piece.options.value;
-				break;
-			case PIECE_TYPE_NUMBER:
-				equation += piece.options.value;
-				break;
-			}
+			equation += piece.options.value;
 		});
+		var operators = equation.match(/[\/\-+*]/g);
+		if(operators === null)
+			operators = [];
 
 		var equationValue = this.evalProgressive(equation);
 
-		// log("equationValue:", equationValue);
+		// console.log("equationValue:", equationValue);
 		if (!scoreChain && equationValue !== null)
 		{
 			return {
 				'value': equationValue,
-				'operators': operatorCount
+				'operators': operators.length
 			};
 		}
 		else if (scoreChain && this.options.targetNumber === equationValue)
@@ -61,18 +55,17 @@ var TargetBoard = new Class(
 			{
 				board.setPieceType(piece);
 			});
-			this.sendScore(equation, operatorCount);
+			this.sendScore(equation, operators.length);
 			$$('.highlighted').addCssAnimation('shake');
 			return {
 				'value': equationValue,
-				'operators': operatorCount
+				'operators': operators.length
 			};
 		}
 		else if (scoreChain)
 		{
 			$$('.highlighted').addCssAnimation('shake');
 		}
-
 		return null;
 	},
 	failPiece: function(piece)
@@ -99,7 +92,7 @@ var TargetBoard = new Class(
 		eventArgs.points = newScore;
 		eventArgs.feedback = feedback;
 		eventArgs.equation = equation;
-		console.log('score:', JSON.stringify(eventArgs));
+		// console.log('score:', JSON.stringify(eventArgs));
 		this.fireEvent(BOARD_SCORE, eventArgs);
 		this.sendTarget();
 	},
@@ -132,15 +125,16 @@ var TargetBoard = new Class(
 				}
 			}
 		}
-		console.log(difficulties);
-		console.log('this.options.difficulty:' + this.options.difficulty + " this.options.progress:" + this.options.progress);
+		// console.log(difficulties);
+		// console.log('this.options.difficulty:' + this.options.difficulty + " this.options.progress:" + this.options.progress);
 
+		var newTarget = NaN;
 		var difficultySet = difficulties[this.options.difficulty];
 		var rand;
 		if (difficultySet.length > 0)
 		{
 			rand = Number.random(0, difficultySet.length - 1);
-			this.options.targetNumber = difficultySet[rand];
+			newTarget = difficultySet[rand];
 			// log('difficultySet.length:' + difficultySet.length);
 			// log(difficultySet[rand]);
 			// log(difficultySet);
@@ -154,9 +148,9 @@ var TargetBoard = new Class(
 				if (difficultySet.length > 0)
 				{
 					rand = Number.random(0, difficultySet.length - 1);
-					this.options.targetNumber = difficultySet[rand];
-					console.log('difficultySet[rand]' + difficultySet[rand]);
-					console.log('rand:' + rand);
+					newTarget = difficultySet[rand];
+					// console.log('difficultySet[rand]' + difficultySet[rand]);
+					// console.log('rand:' + rand);
 					break;
 				}
 				else
@@ -166,14 +160,19 @@ var TargetBoard = new Class(
 			}
 		}
 
-		if (++this.options.progress > this.options.difficulty * 10)
+		if(!isNaN(newTarget))
 		{
-			this.options.difficulty++;
-			this.options.progress = 0;
-		}
+			if (++this.options.progress > this.options.difficulty * 10)
+			{
+				this.options.difficulty++;
+				this.options.progress = 0;
+			}
 
-		console.log('sendTarget took:' + (new Date() - startingTime) + 'ms');
-		this.fireEvent(BOARD_TARGET, this.options.targetNumber);
+			// console.log('sendTarget:', this.options.targetNumber, 'took:',(new Date() - startingTime) + 'ms');
+			this.options.targetNumber = newTarget;
+		}
+		
+		this.fireEvent(BOARD_TARGET, newTarget);
 	},
 	wiggle: function(startingPiece)
 	{
@@ -195,7 +194,6 @@ var TargetBoard = new Class(
 			var newPiece = this.getRandNeighbor(currPiece || lastPiece);
 			if (newPiece !== null) currPiece = newPiece;
 		}
-		// log(tempChain);
 		// log(tempChain.length);
 		// log("score:", score);
 		var chainData = this.validateChain(tempChain, false);
@@ -207,6 +205,8 @@ var TargetBoard = new Class(
 				'solution': tempChain
 			};
 		}
-		else return null;
+		else { 
+			return null;
+		}
 	}
 });
