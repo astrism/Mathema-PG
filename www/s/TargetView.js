@@ -40,12 +40,12 @@ var TargetView = new Class({
 		event.target.getParent('.view').fireEvent(VIEW_NAV, MenuView);
 	},
 	setTarget: function(newValue) {
-		if(!isNaN(newValue))
+		if(newValue !== null && newValue !== undefined)
 			{
 			var targetContainer = $('target');
 			targetContainer.empty();
 			var newTarget = new Element('p', {
-				html: newValue
+				html: newValue.value
 			});
 			targetContainer.adopt(newTarget);
 		} else {

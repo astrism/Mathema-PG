@@ -24,13 +24,11 @@
 
 .start {
 	text-align: center;
-	font-size: 5em;
+	font-size: 4em;
 	padding: 15px;
 	background: #FF0000;
-	position: relative;
-	top: 105px;
 	color: #FFFFFF;
-	margin: 0 1em 0.5em 1em;
+	margin: 1em 1em 0.5em 1em;
 	border-radius: 2px;
 	text-shadow: 0px 0px 25px #000000;
 	box-shadow: 0px 0px 50px #550000;

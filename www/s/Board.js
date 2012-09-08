@@ -1,5 +1,4 @@
 var BOARD_SCORE = 'BOARD_SCORE';
-var BOARD_EQ_UPDATE = 'BOARD_EQ_UPDATE';
 var BOARD_GAME_OVER = 'BOARD_GAME_OVER';
 
 var Board = new Class(
@@ -17,7 +16,7 @@ var Board = new Class(
 		pieces: {},
 		locations: {},
 		chain: [],
-		lastPiece: {},
+		lastPiece: null,
 		currentTarget: {},
 		boundTouchEnd: {},
 		boundTouchMove: {},
@@ -66,7 +65,7 @@ var Board = new Class(
 			piece.options.rep.setPosition(piecePos);
 			col++;
 		}
-		this.setupBoard.delay(100, this);
+		this.setupBoard.delay(10, this);
 	},
 	setupBoard: function()
 	{},
@@ -138,7 +137,6 @@ var Board = new Class(
 			// log("maxDistance:" + this.options.maxDistance);
 			if (index === -1)
 			{
-				target.options.rep.store('line', this.createLine(this.options.lastPiece.options.rep, target.options.rep));
 				this.selectPiece(target);
 			}
 			else if (chain.length > 1 && index === chain.length - 2)
@@ -171,15 +169,16 @@ var Board = new Class(
 	},
 	selectPiece: function(piece)
 	{
+		if(this.options.lastPiece !== null)
+			piece.options.rep.store('line', this.createLine(this.options.lastPiece.options.rep, piece.options.rep));
 		piece.options.rep.addClass('highlighted');
 		this.options.chain.push(piece);
 		this.options.lastPiece = piece;
-		this.fireEvent(BOARD_EQ_UPDATE, this.options.chain);
 	},
 	onTouchEnd: function(event)
 	{
 		// log('onTouchEnd');
-		var score = this.validateChain(this.options.chain, true);
+		this.validateChain(this.options.chain, true);
 		this.clearChain();
 	},
 	validateChain: function()
@@ -191,6 +190,7 @@ var Board = new Class(
 	{
 		$$('.highlighted').removeClass('highlighted');
 		this.options.chain = [];
+		this.options.lastPiece = null;
 
 		this.options.rep.removeEvent('touchend', this.options.boundTouchEnd);
 		this.options.rep.removeEvent('touchmove', this.options.boundTouchMove);

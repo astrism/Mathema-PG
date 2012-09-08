@@ -2,6 +2,11 @@
 	"folders":
 	[
 		{
+			"path": ".",
+			"folder_exclude_patterns": ["www", "Mathema"],
+			"name": "settings"
+		},
+		{
 			"name": "html",
 			"path": "www"
 		},

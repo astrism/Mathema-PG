@@ -4,7 +4,7 @@ var EndGameView = new Class({
 		this.parent(windowSize);
 		var rep = this.options.rep;
 		var title = new Element('h1#title.bounceIn', {
-			html: 'Game<br/>Over'
+			html: 'Game Over'
 		});
 		rep.adopt(title);
 
@@ -24,6 +24,11 @@ var EndGameView = new Class({
 		});
 		rep.adopt(targetButton);
 
+		//score holder
+		var score = new Element('div#score', {
+			text: '0 P0ints'
+		});
+		rep.adopt(score);
 	},
 	onPlayEquation: function(event) {
 		event.target.getParent('.view').fireEvent(VIEW_NAV, EquationView);

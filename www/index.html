@@ -30,6 +30,12 @@
 	<script src="s/TargetView.js"></script>
 	<script src="s/MenuView.js"></script>
 	<script src="s/EndGameView.js"></script>
+	<!--
+	<script src="s/qunit.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen">
+	<link rel="stylesheet" type="text/css" href="c/test.css">
+	-->
 	<link rel="stylesheet" type="text/css" href="c/reset.css">
 	<link rel="stylesheet" type="text/css" href="c/main.css">
 	<link rel="stylesheet" type="text/css" href="c/mathema.css">
@@ -112,6 +118,9 @@
 
 		var viewController = new ViewController(viewSize);
 		body.adopt(viewController.options.viewContainer);
+
+		if(unitTest)
+			unitTest(body, viewController);
 	}
 	</script>
 	</head>

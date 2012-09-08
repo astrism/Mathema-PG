@@ -5,12 +5,12 @@ var TargetBoard = new Class(
 	Extends: Board,
 	options: {
 		targetNumber: 0,
-		difficulty: 1,
-		progress: 0,
-		numbers: []
+		difficulty: 3,
+		progress: 0
 	},
 	setupBoard: function()
 	{
+		console.log('this.options.balance:' + this.options.balance);
 		this.sendTarget();
 	},
 	createPiece: function(id)
@@ -23,7 +23,7 @@ var TargetBoard = new Class(
 		var minNum = PIECE_TYPE_OPERATOR;
 		var maxNum = 3;
 		var rand = Number.random(minNum, maxNum);
-		// log('rand:' + rand);
+		// console.log('rand:' + rand);
 		piece.setValue(rand);
 	},
 	validateChain: function(chain, scoreChain)
@@ -36,8 +36,7 @@ var TargetBoard = new Class(
 			equation += piece.options.value;
 		});
 		var operators = equation.match(/[\/\-+*]/g);
-		if(operators === null)
-			operators = [];
+		if (operators === null) operators = [];
 
 		var equationValue = this.evalProgressive(equation);
 
@@ -49,7 +48,7 @@ var TargetBoard = new Class(
 				'operators': operators.length
 			};
 		}
-		else if (scoreChain && this.options.targetNumber === equationValue)
+		else if (scoreChain && this.options.targetAnswer.value === equationValue)
 		{
 			Array.each(chain, function(piece, i)
 			{
@@ -117,18 +116,17 @@ var TargetBoard = new Class(
 
 				if (difficulties[answer.difficulty] === undefined)
 				{
-					difficulties[answer.difficulty] = [answer.value];
+					difficulties[answer.difficulty] = [answer];
 				}
 				else
 				{
-					difficulties[answer.difficulty].push(answer.value);
+					difficulties[answer.difficulty].push(answer);
 				}
 			}
 		}
-		// console.log(difficulties);
+		console.log(difficulties);
 		// console.log('this.options.difficulty:' + this.options.difficulty + " this.options.progress:" + this.options.progress);
-
-		var newTarget = NaN;
+		var newTarget = null;
 		var difficultySet = difficulties[this.options.difficulty];
 		var rand;
 		if (difficultySet.length > 0)
@@ -160,7 +158,7 @@ var TargetBoard = new Class(
 			}
 		}
 
-		if(!isNaN(newTarget))
+		if (newTarget !== null)
 		{
 			if (++this.options.progress > this.options.difficulty * 10)
 			{
@@ -169,9 +167,9 @@ var TargetBoard = new Class(
 			}
 
 			// console.log('sendTarget:', this.options.targetNumber, 'took:',(new Date() - startingTime) + 'ms');
-			this.options.targetNumber = newTarget;
+			this.options.targetAnswer = newTarget;
 		}
-		
+
 		this.fireEvent(BOARD_TARGET, newTarget);
 	},
 	wiggle: function(startingPiece)
@@ -205,7 +203,8 @@ var TargetBoard = new Class(
 				'solution': tempChain
 			};
 		}
-		else { 
+		else
+		{
 			return null;
 		}
 	}
