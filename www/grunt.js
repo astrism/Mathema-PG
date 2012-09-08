@@ -11,7 +11,7 @@ module.exports = function(grunt)
 			'<%= grunt.template.today("yyyy-mm-dd") %> */'
 		},
 		qunit: {
-			files: 'Test.html'
+			files: 'index.html'
 		},
 		lint: {
 			files: [
@@ -50,6 +50,6 @@ module.exports = function(grunt)
 	});
 
 	// Default task.
-	grunt.registerTask('default', 'lint qunit');
+	grunt.registerTask('default', 'lint');
 
 };

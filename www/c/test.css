@@ -1,0 +1,15 @@
+.piece {
+	-webkit-transition:all 0s;
+}
+
+.piece.highlighted {
+	-webkit-animation-duration: 0s;
+}
+
+.pieceRotate {
+	-webkit-animation-duration: 0s;
+}
+
+#target p {
+	-webkit-animation-duration: 0s;
+}
