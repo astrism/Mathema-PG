@@ -7,12 +7,11 @@
 		"node": ">=0.8"
 	},
 	"scripts": {
-		"start": "node server.js",
 		"test": "grunt travis --verbose"
 	},
 	"devDependencies": {
 		"grunt-contrib-jshint": ">=0.3",
-		"node-static": "*",
-		"grunt": ">=0.4"
+		"grunt": ">=0.4",
+		"grunt-cli": ">=0.1",
 	}
 }
