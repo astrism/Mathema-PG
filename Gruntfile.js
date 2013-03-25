@@ -11,10 +11,10 @@ module.exports = function(grunt)
 			'<%= grunt.template.today("yyyy-mm-dd") %> */'
 		},
 		qunit: {
-			files: 'index.html'
+			files: 'www/index.html'
 		},
 		jshint: {
-			files: ['s/*.js'],
+			files: ['www/s/*.js'],
 			options: {
 				//abbreviated descriptions here for convience, full details/reasoning: jshint.com/docs/
 				//This options prohibits the use of == and != in favor of === and !==. The former try to coerce values before comparing them which can lead to some unexpected results. The latter don't do any coercion so they are generally safer.
@@ -56,5 +56,5 @@ module.exports = function(grunt)
 	// Default task.
 	grunt.registerTask('default', 'jshint');
 	// Travis CI task.
-	grunt.registerTask('travis', 'lint qunit');
+	grunt.registerTask('travis', 'jshint');
 };

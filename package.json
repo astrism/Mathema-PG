@@ -10,11 +10,9 @@
 		"start": "node server.js",
 		"test": "grunt travis --verbose"
 	},
-	"dependencies": {
-		"node-static": "*",
-		"grunt-contrib-jshint": ">=0.3"
-	},
 	"devDependencies": {
+		"grunt-contrib-jshint": ">=0.3",
+		"node-static": "*",
 		"grunt": ">=0.4"
 	}
 }

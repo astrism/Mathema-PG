@@ -19,5 +19,5 @@ profile
 *.sublime-workspace
 
 	# Node
-**/node_modules
-**/npm-debug.log
+**node_modules
+**npm-debug.log
