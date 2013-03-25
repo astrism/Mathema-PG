@@ -3,12 +3,18 @@
 	"version": "0.1.0",
 	"build": 0,
 	"author": "astrism",
+	"engines": {
+		"node": ">=0.8"
+	},
 	"scripts": {
-		"start": "node server.js"
+		"start": "node server.js",
+		"test": "grunt travis --verbose"
 	},
 	"dependencies": {
-		"grunt": "~0.4.1",
 		"node-static": "*",
-		"grunt-contrib-jshint": "~0.3.0"
+		"grunt-contrib-jshint": ">=0.3"
+	},
+	"devDependencies": {
+		"grunt": ">=0.4"
 	}
 }

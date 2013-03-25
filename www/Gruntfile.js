@@ -52,7 +52,9 @@ module.exports = function(grunt)
 
 	// Load NPM Tasks
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	
 	// Default task.
 	grunt.registerTask('default', 'jshint');
-
+	// Travis CI task.
+	grunt.registerTask('travis', 'lint qunit');
 };
