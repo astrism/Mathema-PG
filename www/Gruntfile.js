@@ -13,32 +13,30 @@ module.exports = function(grunt)
 		qunit: {
 			files: 'index.html'
 		},
-		lint: {
-			files: [
-				's/*.js'
-			]
-			// afterconcat: ['js/*.js', 'mod/**/*.js']
-		},
 		jshint: {
+			files: ['s/*.js'],
 			options: {
 				//abbreviated descriptions here for convience, full details/reasoning: jshint.com/docs/
-				eqeqeq: true,
 				//This options prohibits the use of == and != in favor of === and !==. The former try to coerce values before comparing them which can lead to some unexpected results. The latter don't do any coercion so they are generally safer.
-				immed: true,
+				eqeqeq: true,
 				//This option prohibits the use of immediate function invocations without wrapping them in parentheses.
-				unused: true,
-				//This option warns when you define and never use your variables
-				// undef:true, //This option prohibits the use of explicitly undeclared variables
-				nonew: true,
+				immed: true,
 				//This option prohibits the use of constructor functions for side-effects
-				camelcase: true,
+				nonew: true,
 				//This option allows you to force all variable names to use either camelCase style or UPPER_CASE with underscores
-				// latedef: true, //This option prohibits the use of a variable before it was defined
-				// newcap: true, //This option requires you to capitalize names of constructor functions.
-				noarg: true,
+				camelcase: true,
 				//This option prohibits the use of arguments.caller and arguments.callee
-				sub: true
-				//This option suppresses warnings about using [] notation when it can be expressed in dot notation
+				noarg: true,
+				//This option warns when you define and never use your variables
+				unused: false,
+				//This option prohibits the use of explicitly undeclared variables
+				undef: false, 
+				//This option prohibits the use of a variable before it was defined
+				latedef: false,
+				//This option requires you to capitalize names of constructor functions.
+				newcap: false, 
+				browser: true,
+				jquery: true
 			},
 			globals: {},
 			libs: {
@@ -49,7 +47,12 @@ module.exports = function(grunt)
 		}
 	});
 
+	// Load local tasks.
+	grunt.loadTasks('tasks');
+
+	// Load NPM Tasks
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 	// Default task.
-	grunt.registerTask('default', 'lint');
+	grunt.registerTask('default', 'jshint');
 
 };

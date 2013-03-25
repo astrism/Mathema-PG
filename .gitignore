@@ -1,4 +1,4 @@
-  # Xcode
+	# Xcode
 build/*
 *.pbxuser
 !default.pbxuser
@@ -15,5 +15,8 @@ profile
 *.moved-aside
 .DS_Store
 
-  #SublimeText
+	# SublimeText
 *.sublime-workspace
+
+	# Node
+www/node_modules
