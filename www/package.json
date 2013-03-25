@@ -1,12 +1,14 @@
 {
-  "name": "Mathema",
-  "version": "0.1.0",
-  "build": 0,
-  "author": "astrism",
-  "devDependencies": {
-    "grunt": "~0.4.1"
-  },
-  "dependencies": {
-    "grunt-contrib-jshint": "~0.3.0"
-  }
+	"name": "Mathema",
+	"version": "0.1.0",
+	"build": 0,
+	"author": "astrism",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"devDependencies": {
+		"grunt": "~0.4.1",
+		"node-static": "*",
+		"grunt-contrib-jshint": "~0.3.0"
+	}
 }
