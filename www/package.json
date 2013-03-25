@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node server.js"
 	},
-	"devDependencies": {
+	"dependencies": {
 		"grunt": "~0.4.1",
 		"node-static": "*",
 		"grunt-contrib-jshint": "~0.3.0"
